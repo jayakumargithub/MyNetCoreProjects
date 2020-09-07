@@ -34,7 +34,7 @@ static_resources:
                   prefix: "/t"
                 route:
                   prefix_rewrite: "/tea"
-                  cluster: tea_service                  
+                  cluster: tea_service
           http_filters:
           - name: envoy.filters.http.router
   - name: listener_1
@@ -64,7 +64,7 @@ static_resources:
                   prefix: "/t"
                 route:
                   prefix_rewrite: "/tea"
-                  cluster: tea_service                  
+                  cluster: tea_service
           http_filters:
           - name: envoy.filters.http.router
       tls_context:
@@ -109,23 +109,19 @@ static_resources:
       name: envoy.transport_sockets.tls
       typed_config:
         "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
-        sni: localhost  
-  - name: tea_service
+        sni: localhost            
   - name: tea_service
     connect_timeout: 0.25s
     type: LOGICAL_DNS
     # Comment out the following line to test on v6 networks
     dns_lookup_family: V4_ONLY
-    lb_policy: ROUND_ROBIN 
+    lb_policy: ROUND_ROBIN
     load_assignment:
       cluster_name: tea_service
-      connect_timeout: 0.25s
       endpoints:
       - lb_endpoints:
         - endpoint:
             address:
               socket_address:
-                address: teaeapi
+                address: teaapi
                 port_value: 80
- 
-    
